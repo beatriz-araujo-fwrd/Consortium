@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Scroll Pin Demo</title>
+<link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <section class="section section-1">
+    <h2 class="title">title 1</h2>
+    <h2 class="title">title 2</h2>
+    <h2 class="title">title 3</h2>
+  </section>
+
+  <section class="section section-2" id="mapSection">
+    <iframe class="map-frame" src="../map-3d/index.html" title="3D map" loading="lazy"></iframe>
+    <button class="close-btn" id="closeMap" aria-label="Close map">×</button>
+  </section>
+
+  <section class="section section-3">
+    <h2 class="title">title 4</h2>
+    <h2 class="title">title 5</h2>
+  </section>
+
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js" integrity="sha384-g4NTh/Iv5PPU4xPyhEWqPcwtNXOvdaDI8LLnyYfyNZOjKJeYQyjzQ9X5275eBjpt" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/ScrollTrigger.min.js" integrity="sha384-Z3REaz79l2IaAZqJsSABtTbhjgOUYyV3p90XNnAPCSHg3EMTz1fouunq9WZRtj3d" crossorigin="anonymous"></script>
+  <script src="https://cdn.jsdelivr.net/npm/lenis@1.1.13/dist/lenis.min.js" integrity="sha384-B2WBjDzEjJpYvhmi2UyEn7rektqkf5suS6sNoyyrf0EBAwBHdkiXxIlU0V5Ru2ed" crossorigin="anonymous"></script>
+  <script src="script.js"></script>
+</body>
+</html>

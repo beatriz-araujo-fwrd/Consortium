@@ -22,49 +22,6 @@
   #tooltip .loc { font-weight:600; letter-spacing:0.02em; }
   #tooltip .count { color:#e0916f; margin-top:2px; }
 
-  #panel {
-    position:absolute; top:20px; right:20px; width:230px;
-    background:rgba(255,255,255,0.88); backdrop-filter:blur(6px);
-    border:1px solid rgba(23,21,18,0.12); border-radius:6px;
-    padding:14px 16px 16px; font-family:'Helvetica Neue', Arial, sans-serif;
-    color:#171512; box-shadow:0 6px 24px rgba(0,0,0,0.08); z-index:10;
-  }
-  #panel h3 {
-    margin:0 0 10px; font-size:11px; text-transform:uppercase; letter-spacing:0.08em;
-    opacity:0.5; font-weight:600;
-  }
-  .ctrl { margin-bottom:10px; }
-  .ctrl label {
-    display:flex; justify-content:space-between; font-size:11.5px; margin-bottom:3px; opacity:0.85;
-  }
-  .ctrl label span.val { opacity:0.5; font-variant-numeric:tabular-nums; }
-  .ctrl input[type=range] {
-    width:100%; height:14px; -webkit-appearance:none; background:transparent; cursor:pointer;
-  }
-  .ctrl input[type=range]::-webkit-slider-runnable-track {
-    height:3px; background:rgba(23,21,18,0.18); border-radius:2px;
-  }
-  .ctrl input[type=range]::-webkit-slider-thumb {
-    -webkit-appearance:none; width:12px; height:12px; border-radius:50%;
-    background:#FF6E3E; margin-top:-4.5px; cursor:pointer;
-  }
-  .checklabel {
-    display:flex; align-items:center; justify-content:space-between; font-size:11.5px; opacity:0.85; cursor:pointer;
-  }
-  .checklabel input { accent-color:#FF6E3E; cursor:pointer; }
-  .checklabel input[type=color] {
-    width:28px; height:18px; border:1px solid rgba(23,21,18,0.2); border-radius:3px;
-    padding:0; cursor:pointer; background:none;
-  }
-  .seg-wrap { display:flex; gap:6px; }
-  .seg {
-    flex:1; padding:7px 0; font-size:11.5px; letter-spacing:0.04em;
-    text-transform:uppercase; background:rgba(23,21,18,0.08); color:#171512; border:none; border-radius:4px;
-    cursor:pointer; font-family:inherit; transition:background 0.15s, color 0.15s;
-  }
-  .seg.active { background:#171512; color:#f3ede4; }
-  .seg:not(.active):hover { background:rgba(23,21,18,0.14); }
-  .divider { height:1px; background:rgba(23,21,18,0.1); margin:12px 0; }
 </style>
 </head>
 <body>
@@ -72,57 +29,6 @@
   <canvas id="scene"></canvas>
   <div id="hint">drag · orbit — space/middle-drag · pan — scroll · zoom<br>hover a structure for details · click to open</div>
   <div id="tooltip"><div class="loc"></div><div class="count"></div></div>
-
-  <div id="panel">
-    <h3>Terrain</h3>
-    <div class="ctrl"><label>Tile scale <span class="val" id="v-tileScale">1.26</span></label>
-      <input type="range" id="tileScale" min="0.05" max="5" step="0.01" value="1.26"></div>
-    <div class="ctrl"><label>Tile density <span class="val" id="v-density">270</span></label>
-      <input type="range" id="density" min="10" max="500" step="5" value="270"></div>
-    <div class="ctrl"><label>Tile spread <span class="val" id="v-spread">1.40</span></label>
-      <input type="range" id="spread" min="0" max="4" step="0.02" value="1.4"></div>
-    <div class="ctrl"><label>Bobbing amount <span class="val" id="v-bobAmount">0.05</span></label>
-      <input type="range" id="bobAmount" min="0" max="0.3" step="0.002" value="0.05"></div>
-    <div class="ctrl"><label>Bobbing speed <span class="val" id="v-bobSpeed">2.62</span></label>
-      <input type="range" id="bobSpeed" min="0" max="5" step="0.02" value="2.62"></div>
-    <div class="ctrl"><label>Tile angle <span class="val" id="v-tileAngle">43</span></label>
-      <input type="range" id="tileAngle" min="0" max="360" step="1" value="43"></div>
-    <div class="ctrl"><label>Tile angle variation <span class="val" id="v-tileAngleJitter">4.2</span></label>
-      <input type="range" id="tileAngleJitter" min="0" max="45" step="0.1" value="4.2"></div>
-    <div class="ctrl"><label>Elevation height <span class="val" id="v-elevationIntensity">4.9</span></label>
-      <input type="range" id="elevationIntensity" min="0" max="5" step="0.02" value="4.9"></div>
-    <div class="divider"></div>
-    <h3>Structures</h3>
-    <div class="ctrl"><label>Height <span class="val" id="v-structHeight">2.41</span></label>
-      <input type="range" id="structHeight" min="0.05" max="8" step="0.02" value="2.41"></div>
-    <div class="ctrl checkbox-row">
-      <label class="checklabel">Color <input type="color" id="structColor" value="#ff6e3e"></label>
-    </div>
-    <div class="divider"></div>
-    <h3>Lighting</h3>
-    <div class="ctrl checkbox-row">
-      <label class="checklabel">Sun light on <input type="checkbox" id="lightOn" checked></label>
-    </div>
-    <div class="ctrl checkbox-row">
-      <label class="checklabel">Cast shadows <input type="checkbox" id="shadowsOn"></label>
-    </div>
-    <div class="ctrl"><label>Intensity <span class="val" id="v-lightIntensity">0.84</span></label>
-      <input type="range" id="lightIntensity" min="0" max="4" step="0.02" value="0.84"></div>
-    <div class="ctrl"><label>Height <span class="val" id="v-lightHeight">23</span></label>
-      <input type="range" id="lightHeight" min="1" max="80" step="0.5" value="23"></div>
-    <div class="ctrl"><label>Angle <span class="val" id="v-lightAngle">169</span></label>
-      <input type="range" id="lightAngle" min="0" max="360" step="1" value="169"></div>
-    <div class="divider"></div>
-    <div class="seg-wrap">
-      <button id="themeLight" class="seg active">Light</button>
-      <button id="themeDark" class="seg">Dark</button>
-    </div>
-    <div class="divider"></div>
-    <div class="seg-wrap">
-      <button id="viewPersp" class="seg active">Perspective</button>
-      <button id="viewIso" class="seg">Isometric</button>
-    </div>
-  </div>
 </div>
 
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -579,23 +485,6 @@ canvas.addEventListener('wheel', e => {
   e.preventDefault();
 }, { passive:false });
 
-const ISO_THETA = Math.PI/4;          // 45° azimuth
-const ISO_PHI = 0.9553166181245093;   // ~54.7356° from vertical — the classic isometric elevation
-
-function setView(mode){
-  isOrtho = (mode === 'iso');
-  activeCamera = isOrtho ? orthoCamera : perspCamera;
-  if (isOrtho){
-    theta = ISO_THETA;
-    phi = ISO_PHI;
-    updateCamera();
-  }
-  document.getElementById('viewPersp').classList.toggle('active', !isOrtho);
-  document.getElementById('viewIso').classList.toggle('active', isOrtho);
-}
-document.getElementById('viewPersp').addEventListener('click', () => setView('persp'));
-document.getElementById('viewIso').addEventListener('click', () => setView('iso'));
-
 canvas.addEventListener('click', e => {
   const group = pickBuilding(e);
   if (group && group.userData.url){
@@ -608,74 +497,6 @@ window.addEventListener('resize', () => {
   perspCamera.updateProjectionMatrix();
   renderer.setSize(window.innerWidth, window.innerHeight);
   updateCamera();
-});
-
-// ---- control panel wiring ----
-function bindSlider(id, onInput, rebuildFn){
-  const el = document.getElementById(id);
-  const out = document.getElementById('v-'+id);
-  const isInteger = (id === 'density' || id === 'lightAngle' || id === 'lightHeight' || id === 'tileAngle');
-  el.addEventListener('input', () => {
-    const v = parseFloat(el.value);
-    controls[id] = v;
-    out.textContent = isInteger ? Math.round(v) : v.toFixed(3).replace(/0+$/,'').replace(/\.$/, '.0');
-    onInput && onInput(v);
-  });
-  if (rebuildFn){
-    el.addEventListener('change', () => rebuildFn());
-  }
-}
-bindSlider('tileScale');
-bindSlider('density', null, () => { buildTerrain(); buildBuildings(); });
-bindSlider('spread');
-bindSlider('bobAmount');
-bindSlider('bobSpeed');
-bindSlider('tileAngle');
-bindSlider('tileAngleJitter');
-bindSlider('elevationIntensity');
-bindSlider('structHeight');
-bindSlider('lightIntensity', updateSun);
-bindSlider('lightHeight', updateSun);
-bindSlider('lightAngle', updateSun);
-
-document.getElementById('structColor').addEventListener('input', e => {
-  controls.structColor = e.target.value;
-  barMat.color.set(controls.structColor);
-});
-
-function setTheme(mode){
-  controls.theme = mode;
-  const dark = mode === 'dark';
-  const bg = dark ? 0x171512 : 0xf3f1ec;
-  const tile = dark ? 0xf3f1ec : 0x171512;
-  scene.background.set(bg);
-  scene.fog.color.set(bg);
-  dotMat.color.set(tile);
-  document.getElementById('hint').style.color = dark ? '#f3ede4' : '#171512';
-  document.getElementById('themeLight').classList.toggle('active', !dark);
-  document.getElementById('themeDark').classList.toggle('active', dark);
-}
-document.getElementById('themeLight').addEventListener('click', () => setTheme('light'));
-document.getElementById('themeDark').addEventListener('click', () => setTheme('dark'));
-
-document.getElementById('lightOn').addEventListener('change', e => {
-  controls.lightOn = e.target.checked;
-  updateSun();
-});
-document.getElementById('shadowsOn').addEventListener('change', e => {
-  controls.shadowsOn = e.target.checked;
-  sun.castShadow = controls.shadowsOn;
-});
-
-// ---- \ shortcut: hide/show the UI chrome ----
-let uiHidden = false;
-window.addEventListener('keydown', e => {
-  if (e.key === '\\' || e.code === 'Backslash'){
-    uiHidden = !uiHidden;
-    const disp = uiHidden ? 'none' : '';
-    document.getElementById('hint').style.display = disp;
-    document.getElementById('panel').style.display = disp;
-  }
 });
 
 // ---- render loop ----
