@@ -70,7 +70,7 @@
 <body>
 <div id="canvas-wrap">
   <canvas id="scene"></canvas>
-  <div id="hint">drag · orbit — space/middle-drag · pan — scroll · zoom<br>click a structure for details</div>
+  <div id="hint">drag · orbit — space/middle-drag · pan — scroll · zoom<br>hover a structure for details · click to open</div>
   <div id="tooltip"><div class="loc"></div><div class="count"></div></div>
 
   <div id="panel">
@@ -426,30 +426,35 @@ function buildTerrain(){
 buildTerrain();
 
 // ---- buildings ----
+// description: shown in the hover tooltip. url: where a click navigates to (fill in real destinations
+// per city — currently a Google Images search for the city name as a placeholder).
+function imgSearchUrl(query){
+  return `https://www.google.com/search?tbm=isch&q=${encodeURIComponent(query)}`;
+}
 const locations = [
-  { name:'Nashville, TN',       count: 96, usX:65.72, usY:28.73 },
-  { name:'Chattanooga, TN',     count: 22, usX:68.26, usY:31.14 },
-  { name:'Knoxville, TN',       count: 27, usX:70.67, usY:29.16 },
-  { name:'Memphis, TN',         count: 24, usX:60.05, usY:30.92 },
-  { name:'Atlanta, GA',         count: 41, usX:69.86, usY:33.96 },
-  { name:'Charlotte, NC',       count: 33, usX:76.00, usY:30.75 },
-  { name:'Raleigh, NC',         count: 18, usX:79.81, usY:29.55 },
-  { name:'Birmingham, AL',      count: 15, usX:65.68, usY:34.46 },
-  { name:'Louisville, KY',      count: 19, usX:67.48, usY:24.19 },
-  { name:'Indianapolis, IN',    count: 14, usX:66.79, usY:20.88 },
-  { name:'Kansas City, MO',     count: 11, usX:52.21, usY:22.34 },
-  { name:'Chicago, IL',         count: 20, usX:64.24, usY:16.30 },
-  { name:'Dallas, TX',          count: 29, usX:48.37, usY:36.07 },
-  { name:'Houston, TX',         count: 23, usX:50.84, usY:42.63 },
-  { name:'Orlando, FL',         count: 16, usX:75.07, usY:45.28 },
-  { name:'Miami, FL',           count: 13, usX:77.13, usY:51.32 },
-  { name:'Denver, CO',          count: 9,  usX:34.18, usY:20.95 },
-  { name:'Phoenix, AZ',         count: 10, usX:21.92, usY:34.61 },
-  { name:'Los Angeles, CA',     count: 12, usX:11.24, usY:33.31 },
-  { name:'San Francisco,CA',    count: 8,  usX:4.00,  usY:25.23 },
-  { name:'Seattle, WA',         count: 7,  usX:4.16,  usY:3.85  },
-  { name:'New York, NY',        count: 17, usX:87.83, usY:18.84 },
-  { name:'Boston, MA',          count: 10, usX:92.94, usY:15.26 },
+  { name:'Nashville, TN',       count: 96, usX:65.72, usY:28.73, description:'96 projects completed', url:imgSearchUrl('Nashville, TN') },
+  { name:'Chattanooga, TN',     count: 22, usX:68.26, usY:31.14, description:'22 projects completed', url:imgSearchUrl('Chattanooga, TN') },
+  { name:'Knoxville, TN',       count: 27, usX:70.67, usY:29.16, description:'27 projects completed', url:imgSearchUrl('Knoxville, TN') },
+  { name:'Memphis, TN',         count: 24, usX:60.05, usY:30.92, description:'24 projects completed', url:imgSearchUrl('Memphis, TN') },
+  { name:'Atlanta, GA',         count: 41, usX:69.86, usY:33.96, description:'41 projects completed', url:imgSearchUrl('Atlanta, GA') },
+  { name:'Charlotte, NC',       count: 33, usX:76.00, usY:30.75, description:'33 projects completed', url:imgSearchUrl('Charlotte, NC') },
+  { name:'Raleigh, NC',         count: 18, usX:79.81, usY:29.55, description:'18 projects completed', url:imgSearchUrl('Raleigh, NC') },
+  { name:'Birmingham, AL',      count: 15, usX:65.68, usY:34.46, description:'15 projects completed', url:imgSearchUrl('Birmingham, AL') },
+  { name:'Louisville, KY',      count: 19, usX:67.48, usY:24.19, description:'19 projects completed', url:imgSearchUrl('Louisville, KY') },
+  { name:'Indianapolis, IN',    count: 14, usX:66.79, usY:20.88, description:'14 projects completed', url:imgSearchUrl('Indianapolis, IN') },
+  { name:'Kansas City, MO',     count: 11, usX:52.21, usY:22.34, description:'11 projects completed', url:imgSearchUrl('Kansas City, MO') },
+  { name:'Chicago, IL',         count: 20, usX:64.24, usY:16.30, description:'20 projects completed', url:imgSearchUrl('Chicago, IL') },
+  { name:'Dallas, TX',          count: 29, usX:48.37, usY:36.07, description:'29 projects completed', url:imgSearchUrl('Dallas, TX') },
+  { name:'Houston, TX',         count: 23, usX:50.84, usY:42.63, description:'23 projects completed', url:imgSearchUrl('Houston, TX') },
+  { name:'Orlando, FL',         count: 16, usX:75.07, usY:45.28, description:'16 projects completed', url:imgSearchUrl('Orlando, FL') },
+  { name:'Miami, FL',           count: 13, usX:77.13, usY:51.32, description:'13 projects completed', url:imgSearchUrl('Miami, FL') },
+  { name:'Denver, CO',          count: 9,  usX:34.18, usY:20.95, description:'9 projects completed',  url:imgSearchUrl('Denver, CO') },
+  { name:'Phoenix, AZ',         count: 10, usX:21.92, usY:34.61, description:'10 projects completed', url:imgSearchUrl('Phoenix, AZ') },
+  { name:'Los Angeles, CA',     count: 12, usX:11.24, usY:33.31, description:'12 projects completed', url:imgSearchUrl('Los Angeles, CA') },
+  { name:'San Francisco,CA',    count: 8,  usX:4.00,  usY:25.23, description:'8 projects completed',  url:imgSearchUrl('San Francisco, CA') },
+  { name:'Seattle, WA',         count: 7,  usX:4.16,  usY:3.85,  description:'7 projects completed',  url:imgSearchUrl('Seattle, WA') },
+  { name:'New York, NY',        count: 17, usX:87.83, usY:18.84, description:'17 projects completed', url:imgSearchUrl('New York, NY') },
+  { name:'Boston, MA',          count: 10, usX:92.94, usY:15.26, description:'10 projects completed', url:imgSearchUrl('Boston, MA') },
 ];
 
 const barMat = new THREE.MeshStandardMaterial({ color: controls.structColor, roughness:0.5, metalness:0.08 });
@@ -472,7 +477,7 @@ function buildBuildings(){
     group.add(mesh);
     const { x, z } = usToWorld(loc.usX, loc.usY);
     group.position.set(x, terrainHeightAt(loc.usX, loc.usY), z);
-    group.userData = { name: loc.name, count: loc.count, usX: loc.usX, usY: loc.usY };
+    group.userData = { name: loc.name, description: loc.description, url: loc.url, usX: loc.usX, usY: loc.usY };
     scene.add(group);
     buildings.push(group);
   });
@@ -518,24 +523,53 @@ canvas.addEventListener('pointerdown', e => {
   }
 });
 window.addEventListener('pointerup', () => { dragging=false; mode=null; canvas.classList.remove('panning'); });
-window.addEventListener('pointermove', e => {
-  if (!dragging) return;
-  const dx = e.clientX-lastX, dy = e.clientY-lastY;
-  lastX = e.clientX; lastY = e.clientY;
 
-  if (mode === 'orbit'){
-    theta -= dx*0.005;
-    phi = Math.min(Math.PI*0.49, Math.max(0.04, phi - dy*0.005));
-    updateCamera();
-  } else if (mode === 'pan'){
-    const camPos = activeCamera.position;
-    const forward = new THREE.Vector3().subVectors(target, camPos).normalize();
-    const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0,1,0)).normalize();
-    const camUp = new THREE.Vector3().crossVectors(right, forward).normalize();
-    const panScale = radius * 0.0018;
-    target.addScaledVector(right, -dx*panScale);
-    target.addScaledVector(camUp, dy*panScale);
-    updateCamera();
+// ---- hover to inspect, click to open ----
+const raycaster = new THREE.Raycaster();
+const mouse = new THREE.Vector2();
+function pickBuilding(e){
+  mouse.x = (e.clientX/window.innerWidth)*2-1;
+  mouse.y = -(e.clientY/window.innerHeight)*2+1;
+  raycaster.setFromCamera(mouse, activeCamera);
+  const meshes = buildings.flatMap(g => g.children);
+  const hits = raycaster.intersectObjects(meshes);
+  return hits.length ? hits[0].object.parent : null;
+}
+
+window.addEventListener('pointermove', e => {
+  if (dragging){
+    const dx = e.clientX-lastX, dy = e.clientY-lastY;
+    lastX = e.clientX; lastY = e.clientY;
+
+    if (mode === 'orbit'){
+      theta -= dx*0.005;
+      phi = Math.min(Math.PI*0.49, Math.max(0.04, phi - dy*0.005));
+      updateCamera();
+    } else if (mode === 'pan'){
+      const camPos = activeCamera.position;
+      const forward = new THREE.Vector3().subVectors(target, camPos).normalize();
+      const right = new THREE.Vector3().crossVectors(forward, new THREE.Vector3(0,1,0)).normalize();
+      const camUp = new THREE.Vector3().crossVectors(right, forward).normalize();
+      const panScale = radius * 0.0018;
+      target.addScaledVector(right, -dx*panScale);
+      target.addScaledVector(camUp, dy*panScale);
+      updateCamera();
+    }
+    return;
+  }
+
+  const group = pickBuilding(e);
+  if (group){
+    const { name, description } = group.userData;
+    tooltip.style.display='block';
+    tooltip.style.left = e.clientX+'px';
+    tooltip.style.top = e.clientY+'px';
+    tooltip.querySelector('.loc').textContent = name;
+    tooltip.querySelector('.count').textContent = description;
+    canvas.style.cursor = 'pointer';
+  } else {
+    tooltip.style.display='none';
+    canvas.style.cursor = '';
   }
 });
 canvas.addEventListener('contextmenu', e => e.preventDefault());
@@ -562,25 +596,10 @@ function setView(mode){
 document.getElementById('viewPersp').addEventListener('click', () => setView('persp'));
 document.getElementById('viewIso').addEventListener('click', () => setView('iso'));
 
-// ---- click to inspect ----
-const raycaster = new THREE.Raycaster();
-const mouse = new THREE.Vector2();
 canvas.addEventListener('click', e => {
-  mouse.x = (e.clientX/window.innerWidth)*2-1;
-  mouse.y = -(e.clientY/window.innerHeight)*2+1;
-  raycaster.setFromCamera(mouse, activeCamera);
-  const meshes = buildings.flatMap(g => g.children);
-  const hits = raycaster.intersectObjects(meshes);
-  if (hits.length){
-    const group = hits[0].object.parent;
-    const { name, count } = group.userData;
-    tooltip.style.display='block';
-    tooltip.style.left = e.clientX+'px';
-    tooltip.style.top = e.clientY+'px';
-    tooltip.querySelector('.loc').textContent = name;
-    tooltip.querySelector('.count').textContent = count + ' projects completed';
-    clearTimeout(window.__tt);
-    window.__tt = setTimeout(()=> tooltip.style.display='none', 2600);
+  const group = pickBuilding(e);
+  if (group && group.userData.url){
+    window.location.href = group.userData.url;
   }
 });
 
