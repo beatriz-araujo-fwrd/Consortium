@@ -12,3 +12,63 @@
     background-color: var(--color-scheme-1--text-selection);
     color: white;
 }
+
+/*
+*   HOMEPAGE
+*/
+
+/* Work Selection */
+.mwg_effect014 {
+    position: relative;
+    overflow: hidden;
+}
+
+.mwg_effect014 .scroll {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-35%, -35%);
+}
+
+.mwg_effect014 img {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    object-fit: cover;
+}
+
+.mwg_effect014 img.format1 {
+    width: 30vw;
+    height: auto;
+}
+
+.mwg_effect014 img.format2 {
+    width: 29vw;
+    height: auto;
+}
+
+.mwg_effect014 img.format3 {
+    width: 28vw;
+    height: auto;
+}
+
+/* .mwg_effect014 img.format4 {
+    width: 30vw;
+    height: auto;
+}
+
+.mwg_effect014 img.format5 {
+    width: 28vw;
+    height: auto;
+} */
+
+/* preload images */
+.mwg_effect014 .medias img {
+    width: 1px;
+    height: 1px;
+    top: 0;
+    left: 0;
+    position: absolute;
+    visibility: hidden;
+    pointer-events: none;
+}

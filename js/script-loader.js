@@ -7,6 +7,7 @@ const v = Date.now();
 const modules = [
     { path: 'main', exportName: 'mainInit' },
     { path: 'menu', exportName: 'navBarMenu' },
+    { path: 'hp-works', exportName: 'homepageWorks' },
     { path: 'swiper', exportName: 'swiperInit' },
     { path: 'works', exportName: 'works' },
     { path: 'form', exportName: 'form' },
