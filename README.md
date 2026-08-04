@@ -44,7 +44,7 @@ _Entire file is commented out — not currently active or wired into `script-loa
 - Remove selected class from all s_cfo_radio elements
 - Add selected class to the parent .s_cfo_radio of the checked input
 
-### [`js/hp-works.js`](js/hp-works.js) — `homepageWorks()`
+### [`js/homepage.js`](js/homepage.js) — `homepage()`
 
 - Pin the section for a scroll distance proportional to the image count, so the
 - shuffling effect has room to play out in place before the page continues
