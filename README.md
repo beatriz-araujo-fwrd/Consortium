@@ -44,6 +44,19 @@ _Entire file is commented out — not currently active or wired into `script-loa
 - Remove selected class from all s_cfo_radio elements
 - Add selected class to the parent .s_cfo_radio of the checked input
 
+### [`js/hp-works.js`](js/hp-works.js) — `homepageWorks()`
+
+- Pin the section for a scroll distance proportional to the image count, so the
+- shuffling effect has room to play out in place before the page continues
+- scrolling into whatever section comes after it.
+- We pick a random value from the list of predefined classes
+- We create an image
+- We assign it a URL and add a randomly chosen class
+- We add this image to the DOM
+- Different values for X and Y to create a slight squish effect on appearance
+- // Slightly reduce the image size
+- scaleX: 0.96,
+
 ### [`js/main.js`](js/main.js) — `mainInit()`
 
 - LENIS
