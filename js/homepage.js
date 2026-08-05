@@ -171,4 +171,26 @@ export function homepage() {
             ease: `steps(${navigatorItems.length})`,
         });
     }
+
+
+    // Grid Items Slide Down
+    const stickyGridSection = document.querySelector('.hp_grid_sticky');
+    const stickyGridItems = document.querySelectorAll('.hp_grid_sticky .grid_slide_down');
+
+    if(stickyGridSection && stickyGridItems.length > 0) {
+        gsap.to(stickyGridItems, {
+            scrollTrigger: {
+                trigger: stickyGridSection,
+                start: 'top center',
+                end: 'clamp(bottom top)',
+                scrub: true,
+            },
+            yPercent: (i, target) => (i+1) * 42,
+            // paddingTop: (i, target) => {
+            //     const elHeight = parseFloat(getComputedStyle(target).offsetHeight);
+            //     return (elHeight * 0.42);
+            // },
+            stagger: .025
+        });
+    }
 }
