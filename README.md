@@ -79,6 +79,10 @@ _Entire file is commented out — not currently active or wired into `script-loa
 - Initialize
 - Run scroll logic on load in case page is opened mid-scroll
 
+### [`js/next-page.js`](js/next-page.js) — `nextPage()`
+
+_No inline section comments found — see source for details._
+
 ### [`js/swiper.js`](js/swiper.js) — `swiperInit()`
 
 - Init all Swipers
