@@ -2,7 +2,7 @@ export function homepage() {
     document.addEventListener('wheel', () => {
         gsap.to('.scroll', {
             autoAlpha: 0,
-            duration: 0.2,
+            duration: 0.15,
         })
     }, { once: true })
 
@@ -29,10 +29,20 @@ export function homepage() {
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
+        onLeaveBack: () => {
+            // Scrolled back above the section: reset so the effect replays on re-entry
+            currentIndex = 0
+            incr = 0
+        },
+        onEnterBack: () => {
+            // Scrolled back above the section: reset so the effect replays on re-entry
+            currentIndex = 0
+            incr = 0
+        },
     })
 
     document.addEventListener('wheel', (e) => {
-        if (!trigger.isActive) return
+        if (!trigger.isActive || currentIndex >= imagesLength) return
 
         incr += Math.abs(e.deltaY); // Math.abs() to ignore the scroll direction
 
@@ -78,15 +88,14 @@ export function homepage() {
             // ease: 'power4.in',
             duration: .5,
             opacity: 0,
-            delay: 2, // Wait before hiding
+            delay: 1.5, // Wait before hiding
             onComplete: () => {
                 // Remove the image from the DOM for better performance
                 root.removeChild(image);
             }
         })
 
-        // Loop back to the first item when we're out of range in our images array
-        currentIndex = (currentIndex + 1) % imagesLength
+        currentIndex++
     }
 
     // // The headline is made of two lines ("One team." / "One method.") sitting right
