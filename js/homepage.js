@@ -25,7 +25,7 @@ export function homepage() {
     const trigger = ScrollTrigger.create({
         trigger: root,
         start: 'top top',
-        end: `+=${imagesLength * 1200}`,
+        end: `+=${imagesLength * 800}`,
         pin: true,
         pinSpacing: true,
         anticipatePin: 1,
@@ -89,55 +89,108 @@ export function homepage() {
         currentIndex = (currentIndex + 1) % imagesLength
     }
 
-    // The headline is made of two lines ("One team." / "One method.") sitting right
-    // after the image in the same flex column. Their finished position is whatever
-    // the container's own CSS already lays out (flex row, nowrap, 7.25rem) — we
-    // just measure how far each line sits from the image's top/bottom edge and
-    // tween that distance back to 0, so they appear to start pinned to the image
-    // and converge into the headline. Kept in normal flow the whole time (no
-    // position/height juggling) so nothing collapses or gets clipped by the
-    // section's overflow: hidden.
-    const scrollerContainer = document.querySelector('.text-scroller-container'),
-        scrollerImage = scrollerContainer.previousElementSibling,
-        scrollerLines = gsap.utils.toArray('.text-scroller-container-main-text > div')
+    // // The headline is made of two lines ("One team." / "One method.") sitting right
+    // // after the image in the same flex column. Their finished position is whatever
+    // // the container's own CSS already lays out (flex row, nowrap, 7.25rem) — we
+    // // just measure how far each line sits from the image's top/bottom edge and
+    // // tween that distance back to 0, so they appear to start pinned to the image
+    // // and converge into the headline. Kept in normal flow the whole time (no
+    // // position/height juggling) so nothing collapses or gets clipped by the
+    // // section's overflow: hidden.
+    // const scrollerContainer = document.querySelector('.text-scroller-container'),
+    //     scrollerImage = scrollerContainer.previousElementSibling,
+    //     scrollerLines = gsap.utils.toArray('.text-scroller-container-main-text > div')
 
-    const imageRect = scrollerImage.getBoundingClientRect(),
-        lineStartY = scrollerLines.map((line, i) => {
-            const lineRect = line.getBoundingClientRect()
-            return i === 0
-                ? imageRect.top - lineRect.top
-                : imageRect.bottom - lineRect.bottom
-        })
+    // const imageRect = scrollerImage.getBoundingClientRect(),
+    //     lineStartY = scrollerLines.map((line, i) => {
+    //         const lineRect = line.getBoundingClientRect()
+    //         return i === 0
+    //             ? imageRect.top - lineRect.top
+    //             : imageRect.bottom - lineRect.bottom
+    //     })
 
 
     // Text Scroller Timeline
+    const scrollerContainer = document.querySelector('.hp_text_scroller_trigger');
+    const textScrollerContainer = document.querySelector('.text-scroller-container');
+    const scrollerMainText = document.querySelector('.text-scroller-container-main-text');
+
+    let containerWidth = document.querySelector('.container-large').offsetWidth;
+    let scrollerWidth = document.querySelector('.scroller-main-text.top').offsetWidth + document.querySelector('.scroller-main-text.bottom').offsetWidth + document.querySelector('.text-scroller-container-secondary-text').offsetWidth;
+
     const textScrollerTimeline = gsap.timeline({
         scrollTrigger: {
-            trigger: '.text-scroller-container',
-            start: 'top bottom',
-            end: 'top top',
+            trigger: scrollerContainer,
+            start: 'top top',
+            end: 'bottom top-=400px',
             scrub: true,
-            pin: true,
-            markers: true
+            // markers: true,
+        },
+        duration: 1,
+    })
+        .from(textScrollerContainer, {
+            fontSize: "3rem",
+            duration: 1,
+        })
+        .to('.scroller-main-text', {
+            height: 'auto',
+            duration: 1,
+        }, "<");
+    // .to('.text-scroller-container-outer', {
+    //     paddingBottom: '12.5rem'
+    // }, "<");
+
+    gsap.to(textScrollerContainer, {
+        scrollTrigger: {
+            trigger: '.hp_text_scroller_trigger-2',
+            start: 'top 25%',
+            end: 'bottom 60%',
+            scrub: true,
+            // markers: true,
+            onEnter: () => {
+                textScrollerContainer.classList.add('flex-no-wrap');
+                gsap.set('.text-scroller-container-secondary-text', {
+                    opacity: 1,
+                });
+            },
+            onLeaveBack: () => {
+                textScrollerContainer.classList.remove('flex-no-wrap');
+                gsap.set('.text-scroller-container-secondary-text', {
+                    opacity: 0,
+                });
+            }
+        },
+        x: () => {
+
+            let returnValue = -(scrollerWidth * .9725 - containerWidth);
+
+            console.log('containerWidth: ', containerWidth);
+            console.log('scrollerWidth: ', scrollerWidth);
+            console.log('returnValue: ', returnValue);
+            return returnValue
         }
-    }).fromTo(scrollerLines, {
-        y: (i) => lineStartY[i],
-    }, {
-        y: 0,
-        ease: 'none',
-        duration: 1,
-    }, 0).fromTo('.text-scroller-container', {
-        fontSize: '2.5rem',
-        lineHeight: '1.3',
-        paddingTop: '7rem',
-        paddingBottom: '7rem',
-    }, {
-        fontSize: '7.25rem',
-        lineHeight: '1.2',
-        paddingTop: '2rem',
-        paddingBottom: '2rem',
-        duration: 1,
-    }, 0);
+    })
+
+
+
+    // .fromTo(scrollerLines, {
+    //     y: (i) => lineStartY[i],
+    // }, {
+    //     y: 0,
+    //     ease: 'none',
+    //     duration: 1,
+    // }, 0).fromTo('.text-scroller-container', {
+    //     fontSize: '2.5rem',
+    //     lineHeight: '1.3',
+    //     paddingTop: '7rem',
+    //     paddingBottom: '7rem',
+    // }, {
+    //     fontSize: '7.25rem',
+    //     lineHeight: '1.2',
+    //     paddingTop: '2rem',
+    //     paddingBottom: '2rem',
+    //     duration: 1,
+    // }, 0);
 
 
     // Rotator: the circle has 4 fixed labels (Improve/Innovate/Inform/Inspire) and a
@@ -177,7 +230,7 @@ export function homepage() {
     const stickyGridSection = document.querySelector('.hp_grid_sticky');
     const stickyGridItems = document.querySelectorAll('.hp_grid_sticky .grid_slide_down');
 
-    if(stickyGridSection && stickyGridItems.length > 0) {
+    if (stickyGridSection && stickyGridItems.length > 0) {
         gsap.to(stickyGridItems, {
             scrollTrigger: {
                 trigger: stickyGridSection,
@@ -185,7 +238,7 @@ export function homepage() {
                 end: 'clamp(bottom top)',
                 scrub: true,
             },
-            yPercent: (i, target) => (i+1) * 42,
+            yPercent: (i, target) => (i + 1) * 42,
             // paddingTop: (i, target) => {
             //     const elHeight = parseFloat(getComputedStyle(target).offsetHeight);
             //     return (elHeight * 0.42);

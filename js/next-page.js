@@ -10,7 +10,7 @@ export function nextPage() {
                 end: '+=100%',
                 scrub: true,
                 pin: true,
-                markers: true
+                // markers: true
             },
             clipPath: 'inset(0%)',
             ease: 'none',

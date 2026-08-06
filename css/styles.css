@@ -79,4 +79,52 @@
 .next-up-reveal-container {
     clip-path: inset(48%);
 }
+
+
+/*
+*   HP TEXT SCROLLER
+*/
+.text-scroller-container-outer {
+    /* background-color: rgba(128, 128, 128, 0.786); */
+    height: 100svh;
 }
+
+.text-scroller-container {
+    /* background-color: rgba(211, 211, 211, 0.662); */
+    width: auto;
+    flex-wrap: wrap;
+    height: 100%;
+    align-items: baseline;
+}
+
+.text-scroller-container-main-text {
+    /* flex-wrap: wrap; */
+    justify-content: space-between;
+    height: 100%;
+    width: 100%;
+    gap: 0;
+    align-items: center;
+}
+
+.scroller-main-text {
+    height: 100%;
+    /* background-color: rgba(255, 0, 0, 0.316); */
+    white-space: nowrap;
+}
+
+.scroller-main-text.bottom {
+    text-align: right;
+    align-content: flex-end;
+}
+
+.text-scroller-container-secondary-text {
+    opacity: 0;
+    height: 100%;
+    padding-left: 1em;
+}
+
+.flex-no-wrap {
+    flex-wrap: nowrap;
+}
+
+/*
